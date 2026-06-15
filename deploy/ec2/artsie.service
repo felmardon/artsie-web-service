@@ -1,0 +1,34 @@
+[Unit]
+Description=Artsie Web Service
+Documentation=https://github.com/felmardon/artsie-web-service
+After=network.target
+
+[Service]
+Type=simple
+User=artsie
+Group=artsie
+WorkingDirectory=/opt/artsie
+
+# Load environment variables (DB creds, S3 config, etc.)
+EnvironmentFile=/opt/artsie/.env
+
+ExecStart=/usr/bin/java -jar /opt/artsie/app.jar --spring.profiles.active=prod
+ExecStop=/bin/kill -SIGTERM $MAINPID
+
+# Restart on failure with a 10-second delay
+Restart=on-failure
+RestartSec=10
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/artsie/logs
+
+# Logging to journald
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=artsie
+
+[Install]
+WantedBy=multi-user.target

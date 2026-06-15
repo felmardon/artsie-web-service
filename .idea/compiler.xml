@@ -6,8 +6,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="artsie-web-service" />
+        <module name="artsie-domain" />
+        <module name="artsie-admin" />
+        <module name="artsie-storage" />
+        <module name="artsie-app" />
+        <module name="artsie-api" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="artsie-admin" options="-parameters" />
+      <module name="artsie-api" options="-parameters" />
+      <module name="artsie-app" options="-parameters" />
+      <module name="artsie-domain" options="-parameters" />
+      <module name="artsie-storage" options="-parameters" />
+    </option>
   </component>
 </project>
